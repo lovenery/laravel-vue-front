@@ -1,6 +1,7 @@
 # front
 
-> A Vue.js project
+## template
+http://getbootstrap.com/examples/jumbotron-narrow/
 
 ## Build Setup
 
