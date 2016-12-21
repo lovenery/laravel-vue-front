@@ -38,7 +38,9 @@ export default {
             }
             this.$http.post("http://back.dev/oauth/token", data)
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
+                    this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
+                    // console.log(response);
                 })
                 /*
                 .then(function (response) {
