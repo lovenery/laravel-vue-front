@@ -41,6 +41,7 @@ export default {
                     // console.log(response);
                     this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
                     // console.log(response);
+                    this.$router.push("/feed") // redirect
                 })
                 /*
                 .then(function (response) {
