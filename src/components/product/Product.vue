@@ -4,6 +4,7 @@
         <img src="http://findicons.com/files/icons/175/halloween_avatar/256/mike.png">
     </div>
     <div class="caption">
+        {{ product.user_id }}
         <h3>{{ product.name }}</h3>
         <p>{{ product.price }}</p>
 
