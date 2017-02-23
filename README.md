@@ -3,6 +3,9 @@
 ## template
 http://getbootstrap.com/examples/jumbotron-narrow/
 
+## package
+https://github.com/t4t5/sweetalert
+
 ## Build Setup
 
 ``` bash
