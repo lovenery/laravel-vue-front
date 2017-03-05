@@ -17,7 +17,7 @@
             </p>
             <hr>
             <p v-if="product.user_id == authenticatedUser.id">
-                <a href="#" class="btn btn-danger" @click="deleteProduct">
+                <a href="#" class="btn btn-danger" @click="$emit('delete-product')">
                     Delete
                 </a>
             </p>
@@ -31,28 +31,6 @@ import swal from 'sweetalert'
 export default {
     props: ['product', 'authenticatedUser'],
 
-    methods: {
-        deleteProduct () {
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this product!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            },
-
-                function(){
-                    this.$http.delete('api/products/' + this.product.id)
-                        .then(response => {
-                            console.log(response)
-                            swal("Deleted!", "Your product has been deleted.", "success");
-                        })
-                }.bind(this) // bind this let this.$http work
-            );
-        }
-    }
 }
 </script>
 
