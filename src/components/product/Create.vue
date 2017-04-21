@@ -3,23 +3,34 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label>Name:</label>
-                        <input type="text" class="form-control"
-                            v-model="product.name">
-                    </div>
-                    <div class="form-group">
-                        <label>Price:</label>
-                        <input type="text" class="form-control"
-                            v-model="product.price">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" v-model="product.description"></textarea>
-                    </div>
-                    <button class="btn btn-success pull-right" @click="create">
-                        Create
-                    </button>
+                    <form @submit.prevent="create">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input name="name" type="text" class="form-control"
+                                v-validate="'required'"
+                                v-model="product.name">
+                            <div class="help-block alert alert-danger"
+                                v-show="errors.has('name')">
+                                {{ errors.first('name') }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Price:</label>
+                            <input name="price" type="text" class="form-control"
+                                v-validate="'max_value:50|min_value:1'"
+                                v-model="product.price">
+                            <div class="help-block alert alert-danger"
+                                v-show="errors.has('price')">
+                                {{ errors.first('price') }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" v-model="product.description"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-success pull-right" value="Create"
+                            @click="create">
+                    </form>
                 </div>
             </div>
         </div>
@@ -39,11 +50,22 @@
         },
         methods: {
             create() {
-                this.$http.post('api/products', this.product)
+                this.$validator.updateDictionary({
+                    'zh-TW': {
+                        attributes: {
+                            name: '姓名'
+                        }
+                    }
+                })
+                this.$validator.setLocale('zh-TW')
+
+                this.$validator.validateAll().then(() => {
+                    this.$http.post('api/products', this.product)
                     .then(response => {
                         console.log(response.body)
                         this.$router.push('/feed')
                     })
+                })
             }
         }
     }
