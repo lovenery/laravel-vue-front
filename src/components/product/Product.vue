@@ -1,7 +1,8 @@
 <template lang="html">
 <div class="col-md-4">
     <div class="thumbnail">
-        <img src="http://findicons.com/files/icons/175/halloween_avatar/256/mike.png">
+        <!--<img src="http://findicons.com/files/icons/175/halloween_avatar/256/mike.png">-->
+        <img :src="'http://back.dev/' + product.image">
         <div class="caption">
             {{ product.user_id }}
             <h3>{{ product.name }}</h3>
